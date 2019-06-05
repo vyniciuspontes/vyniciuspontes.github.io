@@ -35,7 +35,7 @@ paths:
               example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
 
         400:
-          description: Format error on some propertie of the body
+          description: Format error on some property of the body
           headers:
             Chain-Id:
               schema:
@@ -74,13 +74,17 @@ components:
           type: string
           format: date-time
         path:
-          type: /orders
+          type: string
+          example: /order
         status:
-          type: 400
+          type: integer
+          example: 400
         error:
-          type: Bad Request
+          type: string
+          example: Bad Request
         message:
-          type: Field 'sale.saleItem.products[].discounts[].value' has an invalid format
+          type: string
+          example: Field 'sale.saleItem.products[].discounts[].value' has an invalid format
 
     GatwayTimeoutError:
       type: object
@@ -89,13 +93,17 @@ components:
           type: string
           format: date-time
         path:
-          type: /orders
+          type: string
+          example: /orders
         status:
-          type: 504
+          type: integer
+          example: 504
         error:
-          type: Gatway Timeout
+          type: string
+          example: Gatway Timeout
         message:
-          type: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server
+          type: string
+          example: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server
 
     Order:
       type: object
