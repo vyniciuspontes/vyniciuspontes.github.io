@@ -147,8 +147,6 @@ components:
             saleItem:
               type: object
               properties:
-                couponNumber:
-                  type: string
                 customer:
                   type: object
                   properties:
@@ -186,7 +184,7 @@ components:
                     properties:
                       cartRegisterDate:
                         type: string
-                      comercialUnit:
+                      commercialUnit:
                         type: string
                       departmentCode:
                         type: string

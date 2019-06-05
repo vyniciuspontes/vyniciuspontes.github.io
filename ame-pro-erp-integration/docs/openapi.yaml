@@ -251,6 +251,13 @@ components:
         shipping_cost:
           type: number
           description: Item shipping cost
+        commercial_unit:
+          type: string
+          enum:
+            - PC
+            - KG
+            - UNID
+            - M
     Invoice:
       type: object
       properties:
