@@ -75,7 +75,7 @@ components:
           format: date-time
         path:
           type: string
-          example: /order
+          example: /orders
         status:
           type: integer
           example: 400
