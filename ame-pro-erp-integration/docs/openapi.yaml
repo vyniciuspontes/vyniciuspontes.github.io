@@ -15,7 +15,7 @@ paths:
     post:
       tags:
       - Reverse Proxy
-      summary: Order submissions made from PDV and Marketplace to Ame Pro ERP
+      summary: Order submissions sent to Ame Pro ERP
       operationId: createOrders
       requestBody:
         $ref: '#/components/requestBodies/Orders'
