@@ -15,7 +15,7 @@ paths:
     post:
       tags:
       - Reverse Proxy
-      summary: Order submissions made from PDV and Marketplace to ERP
+      summary: Order submissions made from PDV and Marketplace to Ame Pro ERP
       operationId: createOrders
       requestBody:
         $ref: '#/components/requestBodies/Orders'
@@ -401,68 +401,128 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/OrderCollection'
-          example:
-            platform: B2SKY
-            order_package:
-            - external_id: "001101201906031355002"
-              order:
-                operator: "000036001357"
-                session_id: "1558539023088"
-                store_id: "001"
-                pos_id: "101"
-                code: "001101201906031355001"
-                channel: POS
-                placed_at: 2019-05-22T15:30:23.088Z
-                updated_at: 2019-05-22T15:30:23.088Z
-                items:
-                - id: "7896341101987"
-                  product_id: "7896341101987"
-                  name: Bacon
-                  qty: 1
-                  original_price: 1.99
-                  special_price: 0.99
-                customer:
-                  vat_number: "12345678909"
-                  phones: []
-                status:
-                  code: Cancelled
-                  label: Cancelado (SkyHub)
-                  type: CANCELED
-                total_ordered: 1.99
-                discount: 0
-                payments:
-                - method: MONEY
-                  value: 0.99
-                  change: 0
-                  transaction_date: 2019-05-22T15:25:23.088Z
-                - method: AME_DIGITAL
-                  value: 0.5
-                  parcels: 1
-                  ame_operation_id: "654321"
-                  nsu: "123456"
-                  transaction_id: "123456789"
-                  transaction_date: 2019-05-22T15:26:23.088Z
-                - method: DEBIT_ACCOUNT
-                  value: 0.25
-                  parcels: 1
-                  transaction_date: 2019-05-22T15:27:23.088Z
-                - method: CREDIT_CARD
-                  value: 0.25
-                  parcels: 1
-                  transaction_date: 2019-05-22T15:28:23.088Z
-                refund:
-                  cancelation_reason: "1"
-                  sefaz_protocol_number: "333190000484874"
-                  sefaz_authorization_date: 2019-05-23T18:36:18-03:00
-                  contingency: false
-                invoices:
-                - key: NFe33181233014556020200654000000000271995355507
-                  number: "19454"
-                  line: "1"
-                  issue_date: 2019-05-22T15:30:23.087Z
-                  contingency: false
+          examples:
+            New Order From PDV:
+              value:
+                platform: B2SKY
+                order_package:
+                - external_id: "001101201906031355002"
+                  order:
+                    operator: "000036001357"
+                    session_id: "1558539023088"
+                    store_id: "001"
+                    pos_id: "101"
+                    code: "001101201906031355001"
+                    channel: POS
+                    placed_at: 2019-05-22T15:30:23.088Z
+                    updated_at: 2019-05-22T15:30:23.088Z
+                    items:
+                    - id: "7896341101987"
+                      product_id: "7896341101987"
+                      name: Bacon
+                      qty: 1
+                      original_price: 1.99
+                      special_price: 0.99
+                    customer:
+                      vat_number: "12345678909"
+                      phones: []
+                    status:
+                      code: Cancelled
+                      label: Cancelado (SkyHub)
+                      type: CANCELED
+                    total_ordered: 1.99
+                    discount: 0
+                    payments:
+                    - method: MONEY
+                      value: 0.99
+                      change: 0
+                      transaction_date: 2019-05-22T15:25:23.088Z
+                    - method: AME_DIGITAL
+                      value: 0.5
+                      parcels: 1
+                      ame_operation_id: "654321"
+                      nsu: "123456"
+                      transaction_id: "123456789"
+                      transaction_date: 2019-05-22T15:26:23.088Z
+                    - method: DEBIT_ACCOUNT
+                      value: 0.25
+                      parcels: 1
+                      transaction_date: 2019-05-22T15:27:23.088Z
+                    - method: CREDIT_CARD
+                      value: 0.25
+                      parcels: 1
+                      transaction_date: 2019-05-22T15:28:23.088Z
+                    refund:
+                      cancelation_reason: "1"
+                      sefaz_protocol_number: "333190000484874"
+                      sefaz_authorization_date: 2019-05-23T18:36:18-03:00
+                      contingency: false
+                    invoices:
+                    - key: NFe33181233014556020200654000000000271995355507
+                      number: "19454"
+                      line: "1"
+                      issue_date: 2019-05-22T15:30:23.087Z
+                      contingency: false
+            Refund Order From PDV:
+              value:
+                platform: B2SKY
+                order_package:
+                  - external_id: 001101201906031355002
+                    order:
+                      operator: '000036001357'
+                      session_id: '1558539023088'
+                      store_id: '001'
+                      pos_id: '101'
+                      code: 001101201906031355001
+                      channel: POS
+                      placed_at: '2019-05-22T15:30:23.088Z'
+                      updated_at: '2019-05-22T15:30:23.088Z'
+                      items:
+                        - id: '7896341101987'
+                          product_id: '7896341101987'
+                          name: Bacon
+                          qty: 1
+                          original_price: 1.99
+                          special_price: 0.99
+                      customer:
+                        vat_number: '12345678909'
+                        phones: []
+                      status:
+                        code: Cancelled
+                        label: Cancelado (SkyHub)
+                        type: CANCELED
+                      total_ordered: 1.99
+                      discount: 0
+                      payments:
+                        - method: MONEY
+                          value: 0.99
+                          change: 0
+                          transaction_date: '2019-05-22T15:25:23.088Z'
+                        - method: AME_DIGITAL
+                          value: 0.5
+                          parcels: 1
+                          ame_operation_id: '654321'
+                          nsu: '123456'
+                          transaction_id: '123456789'
+                          transaction_date: '2019-05-22T15:26:23.088Z'
+                        - method: DEBIT_ACCOUNT
+                          value: 0.25
+                          parcels: 1
+                          transaction_date: '2019-05-22T15:27:23.088Z'
+                        - method: CREDIT_CARD
+                          value: 0.25
+                          parcels: 1
+                          transaction_date: '2019-05-22T15:28:23.088Z'
+                      refund:
+                        cancelation_reason: '1'
+                        sefaz_protocol_number: '333190000484874'
+                        sefaz_authorization_date: '2019-05-23T18:36:18-03:00'
+                        contingency: false
+                      invoices:
+                        - key: NFe33181233014556020200654000000000271995355507
+                          number: '19454'
+                          line: '1'
+                          issue_date: '2019-05-22T15:30:23.087Z'
+                          contingency: false
+
       required: true
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
