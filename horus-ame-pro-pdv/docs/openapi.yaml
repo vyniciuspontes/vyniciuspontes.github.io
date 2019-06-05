@@ -1,0 +1,308 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+info:
+  description: This API describes the endpoints published by Horus Ame Pro PDV
+  version: "1.0.0"
+  title: Horus Ame Pro PDV
+
+servers:
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/vyniciuspontes/horus-ame-pro-pdv/1.0.0
+
+
+tags:
+  - name: Orders
+
+paths:
+
+  /orders:
+    post:
+      security:
+        - basicAuth: []
+      summary: Send order to ERP
+      operationId: orderPackagePDV
+      tags: [Orders]
+      requestBody:
+        $ref: '#/components/requestBodies/Order'
+      responses:
+        200:
+          description: Successfully send order to ERP
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+
+        502:
+          description: The proxy server received an invalid response from ERP
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultError'
+
+components:
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+
+  schemas:
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+        couponNumber:
+          type: string
+        storeId:
+          type: string
+        posId:
+          type: string
+        companyId:
+          type: string
+        accountingDay:
+          type: string
+          format: date
+        endDate:
+          type: string
+        operator:
+          type: string
+        refund:
+          type: object
+          properties:
+            cancelReason:
+              type: string
+            contingency:
+              type: boolean
+            originalSaleId:
+              type: string
+            originalCouponNumber:
+              type: string
+            sefazAuthorizationDate:
+              type: string
+              format: date-time
+            sefazProtocolNumber:
+              type: string
+        sale:
+          type: object
+          properties:
+            saleItem:
+              type: object
+              properties:
+                couponNumber:
+                  type: string
+                customer:
+                  type: object
+                  properties:
+                    documentType:
+                      type: string
+                    document:
+                      type: string
+                invoice:
+                  type: object
+                  properties:
+                    createDate:
+                      type: string
+                    number:
+                      type: integer
+                      format: int32
+                    serie:
+                      type: integer
+                      format: int32
+                    contingency:
+                      type: boolean
+                    sefazAuthorization:
+                      type: object
+                      properties:
+                        accessKey:
+                          type: string
+                        authorizationDate:
+                          type: string
+                          format: date-time
+                        protocolNumber:
+                          type: string
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      cartRegisterDate:
+                        type: string
+                      comercialUnit:
+                        type: string
+                      departmentCode:
+                        type: string
+                      description:
+                        type: string
+                      discounts:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                            value:
+                              type: string
+                            discountType:
+                              type: string
+                      ean:
+                        type: string
+                      externalCode:
+                        type: string
+                      imeis:
+                        type: array
+                        items:
+                          type: string
+                      priceType:
+                        type: string
+                      ncm:
+                        type: string
+                      cfop:
+                        type: string
+                      taxInfo:
+                        type: object
+                        properties:
+                          approximateTotalValue:
+                            type: string
+                          icms:
+                            type: object
+                            properties:
+                              aliquot:
+                                type: string
+                              productOriginCode:
+                                type: string
+                              modalityBaseCalculation:
+                                type: string
+                              simplesNacionalSituation:
+                                type: string
+                          ipi:
+                            type: object
+                            properties:
+                              taxSituation:
+                                type: string
+                              baseCalculationValue:
+                                type: string
+                              aliquot:
+                                type: string
+                              value:
+                                type: string
+                              unitValue:
+                                type: string
+                          pis:
+                            type: object
+                            properties:
+                              aliquotSt:
+                                type: string
+                              baseCalculationValue:
+                                type: string
+                              baseCalculationValueSt:
+                                type: string
+                              taxSituation:
+                                type: string
+                              aliquot:
+                                type: string
+                              aliquotReais:
+                                type: string
+                              aliquotReaisSt:
+                                type: string
+                              value:
+                                type: string
+                              valueSt:
+                                type: string
+                          cofins:
+                            type: object
+                            properties:
+                              aliquotSt:
+                                type: string
+                              baseCalculationValue:
+                                type: string
+                              baseCalculationValueSt:
+                                type: string
+                              taxSituation:
+                                type: string
+                              aliquot:
+                                type: string
+                              aliquotReais:
+                                type: string
+                              aliquotReaisSt:
+                                type: string
+                              value:
+                                type: string
+                              valueSt:
+                                type: string
+                      quantity:
+                        type: integer
+                        format: int32
+                      sequenceCouponNumber:
+                        type: integer
+                        format: int32
+                      totalDiscountValue:
+                        type: string
+                      totalProductValue:
+                        type: string
+                      unitValue:
+                        type: string
+                payments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      value:
+                        type: string
+                      change:
+                        type: number
+                      date:
+                        type: string
+                saleItemTotal:
+                  type: object
+                  properties:
+                    quantity:
+                      type: integer
+                      format: int32
+                    totalDiscountValue:
+                      type: string
+                    totalSale:
+                      type: string
+                    totalValue:
+                      type: string
+        sessionId:
+          type: string
+        startDate:
+          type: string
+        zoneId:
+          type: string
+
+
+    DefaultError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string
+        status:
+          type: string
+        error:
+          type: string
+        message:
+          type: string
+
+
+  requestBodies:
+    Order:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Order'
+      description: Order Package Collection
+      required: true
