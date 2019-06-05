@@ -8,7 +8,7 @@ info:
 servers:
 # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/vyniciuspontes/horus-ame-pro-pdv/1.0.0
+    url: http://homolog-b2w.horus-ame-pro-pdv.atlas.b2w
 
 
 tags:
@@ -16,7 +16,7 @@ tags:
 
 paths:
 
-  /orders:
+  orders:
     post:
       security:
         - basicAuth: []
