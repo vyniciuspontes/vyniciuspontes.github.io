@@ -12,20 +12,101 @@ servers:
 
 tags:
   - name: Products
-  - name: Products PDV
-  - name: Products Marketplace
 
 paths:
   /products:
     post:
       security:
         - basicAuth: []
-      summary: Create product on all channels (pdv, marketplace)
+      summary: Create a product on all channel types
+      description: Create a product on all channel types (online, offline)
+      operationId: createProductOnAllChannels
+      tags: [Products]
+      responses:
+        400:
+          description: Indicates that the Integration Server has encountered a format error on some property of the body
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: chain-id of the application
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBodyError'
+
+        502:
+          description: The proxy server received an invalid response from channels
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEditProductError'
+
+      requestBody:
+        $ref: '#/components/requestBodies/Products'
+
+    put:
+      security:
+        - basicAuth: []
+      summary: Edit a product on all channel types
+      description: Edit a product on all channel types (online, offline)
+      operationId: editProductOnAllChannels
+      tags: [Products]
+      responses:
+        400:
+          description: Indicates that the Integration Server has encountered a format error on some property of the body
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: chain-id of the application
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBodyError'
+
+        502:
+          description: The proxy server received an invalid response from channels
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEditProductError'
+
+      requestBody:
+        $ref: '#/components/requestBodies/Products'
+
+  /products/{channelType}:
+    post:
+      parameters:
+        - in: path
+          required: true
+          name: channelType
+          schema:
+            type: string
+            enum:
+              - online
+              - offline
+      security:
+        - basicAuth: []
+      summary: Create a product
       operationId: createProduct
       tags: [Products]
       responses:
-        201:
-          description: Successfully created product
+        400:
+          description: Indicates that the Integration Server has encountered a format error on some property of the body
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: chain-id of the application
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBodyError'
+
         502:
           description: The proxy server received an invalid response from channels
           content:
@@ -35,15 +116,35 @@ paths:
 
       requestBody:
         $ref: '#/components/requestBodies/Products'
+
     put:
+      parameters:
+        - in: path
+          required: true
+          name: channelType
+          schema:
+            type: string
+            enum:
+              - online
+              - offline
       security:
         - basicAuth: []
-      summary: Edit product on all channels (pdv, marketplace)
+      summary: Edit a product
       operationId: editProduct
       tags: [Products]
       responses:
-        201:
-          description: Successfully edited product
+        400:
+          description: Indicates that the Integration Server has encountered a format error on some property of the body
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: chain-id of the application
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBodyError'
         502:
           description: The proxy server received an invalid response from channels
           content:
@@ -54,199 +155,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Products'
 
-  /products/pdv:
-    post:
-      security:
-        - basicAuth: []
-      summary: Create product on pdv channel
-      operationId: createProductOnPDV
-      tags: [Products PDV]
-      responses:
-        201:
-          description: Successfully created product
-        502:
-          description: The proxy server received an invalid response from pdv channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-
-      requestBody:
-        $ref: '#/components/requestBodies/Products'
-    put:
-      security:
-        - basicAuth: []
-      summary: Edit product on pdv channel
-      operationId: editProductOnPDV
-      tags: [Products PDV]
-      responses:
-        201:
-          description: Successfully edited product
-        502:
-          description: The proxy server received an invalid response from pdv channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-
-      requestBody:
-        $ref: '#/components/requestBodies/Products'
-
-  /products/pdv/{sellerName}/{storeId}:
-    get:
-      parameters:
-        - in: path
-          required: true
-          name: sellerName
-          schema:
-            type: string
-        - in: path
-          required: true
-          name: storeId
-          schema:
-            type: string
-      security:
-        - basicAuth: []
-      summary: get products on pdv channel
-      operationId: getProductsOnPDV
-      tags: [Products PDV]
-      responses:
-        200:
-          description: Successfully retrieved all products from pdv channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseProducts'
-
-  /products/pdv/{sellerName}/{storeId}/{sku}:
-    get:
-      parameters:
-        - in: path
-          required: true
-          name: sellerName
-          schema:
-            type: string
-        - in: path
-          required: true
-          name: storeId
-          schema:
-            type: string
-        - in: path
-          required: true
-          name: sku
-          schema:
-            type: string
-      security:
-        - basicAuth: []
-      summary: get product by SKU on pdv channel
-      operationId: getProductOnPDV
-      tags: [Products PDV]
-      responses:
-        200:
-          description: Successfully deleted product from pdv channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Product'
-
-        502:
-          description: The proxy server received an invalid response from pdv channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-    delete:
-      parameters:
-        - in: path
-          required: true
-          name: sellerName
-          schema:
-            type: string
-        - in: path
-          required: true
-          name: storeId
-          schema:
-            type: string
-        - in: path
-          required: true
-          name: sku
-          schema:
-            type: string
-      security:
-        - basicAuth: []
-      summary: delete product on pdv channel
-      operationId: deleteProductOnPDV
-      tags: [Products PDV]
-      responses:
-        201:
-          description: Successfully deleted product from pdv channel
-        502:
-          description: The proxy server received an invalid response from pdv channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-
-  /products/marketplace:
-    post:
-      security:
-        - basicAuth: []
-      summary: Create product on marketplace channel
-      operationId: createProductOnMarketplace
-      tags: [Products Marketplace]
-      responses:
-        201:
-          description: Successfully created product
-        502:
-          description: The proxy server received an invalid response from marketplace channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-
-      requestBody:
-        $ref: '#/components/requestBodies/Products'
-    put:
-      security:
-        - basicAuth: []
-      summary: Edit product on marketplace channel
-      operationId: editProductOnMarketplace
-      tags: [Products Marketplace]
-      responses:
-        201:
-          description: Successfully edited product
-        502:
-          description: The proxy server received an invalid response from marketplace channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-
-      requestBody:
-        $ref: '#/components/requestBodies/Products'
-
-  /products/marketplace/{sellerName}:
-    get:
-      parameters:
-        - in: path
-          required: true
-          name: sellerName
-          schema:
-            type: string
-      security:
-        - basicAuth: []
-      summary: get products on marketplace channel
-      operationId: getProductsOnMarketplace
-      tags: [Products Marketplace]
-      responses:
-        200:
-          description: Successfully retrieved all products from marketplace channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseProducts'
-
-  /products/marketplace/{sellerName}/{sku}:
+  /products/online/{sellerName}/{sku}:
     delete:
       parameters:
         - in: path
@@ -257,23 +166,27 @@ paths:
         - in: path
           required: true
           name: sku
+          description: Sku of the product to be deleted.
           schema:
             type: string
       security:
         - basicAuth: []
-      summary: delete product on marketplace channel
-      operationId: deleteProductOnMarketplace
-      tags: [Products Marketplace]
+      summary: Delete online product
+      description: Delete product from online channel type
+      operationId: deleteOnlineProduct
+      tags: [Products]
       responses:
-        201:
-          description: Successfully deleted product from marketplace channel
+        204:
+          description: Successfully deleted product from offline channel
         502:
-          description: The proxy server received an invalid response from marketplace channel
+          description: The proxy server received an invalid response from pdv channel
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateEditProductError'
-    get:
+
+  /products/offline/{sellerName}/{storeId}/{sku}:
+    delete:
       parameters:
         - in: path
           required: true
@@ -282,24 +195,27 @@ paths:
             type: string
         - in: path
           required: true
+          name: storeId
+          description: Identifies the store of the operation. Necessary for offline operations.
+          schema:
+            type: string
+        - in: path
+          required: true
           name: sku
+          description: Sku of the product to be deleted.
           schema:
             type: string
       security:
         - basicAuth: []
-      summary: get product by SKU on marketplace
-      operationId: getProductOnMarketplace
-      tags: [Products Marketplace]
+      summary: Delete offline product
+      description: Delete product from offline channel type
+      operationId: deleteOfflineProduct
+      tags: [Products]
       responses:
-        200:
-          description: Successfully retrieved product from marketplace channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Product'
-
+        204:
+          description: Successfully deleted product from offline channel
         502:
-          description: The proxy server received an invalid response from marketplace channel
+          description: The proxy server received an invalid response from pdv channel
           content:
             application/json:
               schema:
@@ -312,6 +228,46 @@ components:
       scheme: basic
 
   schemas:
+
+    InvalidBodyError:
+      type: object
+      description: Indicates that the server has received an invalid body format
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string
+          example: /orders
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: Field 'example-field' has an invalid format
+
+    GatwayTimeoutError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string
+          example: /orders
+        status:
+          type: integer
+          example: 504
+        error:
+          type: string
+          example: Gatway Timeout
+        message:
+          type: string
+          example: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server
+
     DefaultError:
       type: object
       properties:
@@ -348,11 +304,13 @@ components:
             properties:
               channel:
                 type: string
+                description: Indicates the channel type where the error has been occurred
                 enum:
-                  - marketplace
-                  - pdv
+                  - online
+                  - offline
               error:
                 type: string
+                description: message from the error channel
 
     ResponseProducts:
       type: object
