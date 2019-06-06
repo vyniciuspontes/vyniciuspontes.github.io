@@ -264,7 +264,7 @@ components:
         - sku
         - price_start
         - commercial_unit
-        - icms_origin_code
+        - fiscal
       properties:
         store_id:
           type: string
@@ -280,20 +280,29 @@ components:
           type: string
           description: date-time of price vigency
           format: date-time
-
-        icms_origin_code:
-          type: string
-          description: ICMS origin code
-          enum:
-            - "0"
-            - "3"
-            - "4"
-            - "5"
-            - "8"
-            - "1"
-            - "2"
-            - "3"
-            - "7"
+        tax:
+          type: object
+          properties:
+            cfop:
+              type: string
+              description: Product CFOP (Código Fiscal De Operações e Prestações)
+              required: true
+            icms_origin_code:
+              type: string
+              description: ICMS production origin code
+              enum:
+                - "0"
+                - "3"
+                - "4"
+                - "5"
+                - "8"
+                - "1"
+                - "2"
+                - "3"
+                - "7"
+          required:
+            - cfop
+            - icms_origin_code
         sku:
           type: string
           description: Product SKU code
