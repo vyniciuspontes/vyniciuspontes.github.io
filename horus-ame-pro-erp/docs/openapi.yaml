@@ -188,46 +188,24 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Products'
 
-  /products/online/{sellerName}/{sku}:
+  /products/{channelType}/{sellerName}/{storeId}/{sku}:
     delete:
       parameters:
+        - in: path
+          required: true
+          name: channelType
+          schema:
+            type: string
+            enum:
+            - online
+            - offline
         - in: path
           required: true
           name: sellerName
           schema:
             type: string
         - in: path
-          required: true
-          name: sku
-          description: Sku of the product to be deleted.
-          schema:
-            type: string
-      security:
-        - basicAuth: []
-      summary: Delete online product
-      description: Delete product from online channel type
-      operationId: deleteOnlineProduct
-      tags: [Products]
-      responses:
-        204:
-          description: Successfully deleted product from offline channel
-        502:
-          description: The proxy server received an invalid response from pdv channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-
-  /products/offline/{sellerName}/{storeId}/{sku}:
-    delete:
-      parameters:
-        - in: path
-          required: true
-          name: sellerName
-          schema:
-            type: string
-        - in: path
-          required: true
+          required: false
           name: storeId
           description: Identifies the store of the operation. Necessary for offline operations.
           schema:
@@ -240,9 +218,9 @@ paths:
             type: string
       security:
         - basicAuth: []
-      summary: Delete offline product
-      description: Delete product from offline channel type
-      operationId: deleteOfflineProduct
+      summary: Delete product
+      description: Delete product from online channel type
+      operationId: deleteOnlineProduct
       tags: [Products]
       responses:
         204:
