@@ -23,13 +23,22 @@ paths:
       operationId: createProductOnAllChannels
       tags: [Products]
       responses:
+        201:
+          description: Successfully created product on all channel types
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+
         400:
           description: Indicates that the Integration Server has encountered a format error on some property of the body
           headers:
             Chain-Id:
               schema:
                 type: string
-                description: chain-id of the application
+                description: transaction chain-id
               example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
           content:
             application/json:
@@ -54,13 +63,21 @@ paths:
       operationId: editProductOnAllChannels
       tags: [Products]
       responses:
+        204:
+          description: Successfully edited product on all channel types
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
         400:
           description: Indicates that the Integration Server has encountered a format error on some property of the body
           headers:
             Chain-Id:
               schema:
                 type: string
-                description: chain-id of the application
+                description: transaction chain-id
               example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
           content:
             application/json:
@@ -94,13 +111,21 @@ paths:
       operationId: createProduct
       tags: [Products]
       responses:
+        201:
+          description: Successfully created product
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
         400:
           description: Indicates that the Integration Server has encountered a format error on some property of the body
           headers:
             Chain-Id:
               schema:
                 type: string
-                description: chain-id of the application
+                description: transaction chain-id
               example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
           content:
             application/json:
@@ -133,13 +158,21 @@ paths:
       operationId: editProduct
       tags: [Products]
       responses:
+        204:
+          description: Successfully edited product on all channel types
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
         400:
           description: Indicates that the Integration Server has encountered a format error on some property of the body
           headers:
             Chain-Id:
               schema:
                 type: string
-                description: chain-id of the application
+                description: transaction chain-id
               example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
           content:
             application/json:
