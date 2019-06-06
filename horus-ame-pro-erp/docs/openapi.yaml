@@ -14,91 +14,11 @@ tags:
   - name: Products
 
 paths:
-  /products:
-    post:
-      security:
-        - basicAuth: []
-      summary: Create a product on all channel types
-      description: Create a product on all channel types (online, offline)
-      operationId: createProductOnAllChannels
-      tags: [Products]
-      responses:
-        201:
-          description: Successfully created product on all channel types
-          headers:
-            Chain-Id:
-              schema:
-                type: string
-                description: transaction chain-id
-              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
-
-        400:
-          description: Indicates that the Integration Server has encountered a format error on some property of the body
-          headers:
-            Chain-Id:
-              schema:
-                type: string
-                description: transaction chain-id
-              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidBodyError'
-
-        502:
-          description: The proxy server received an invalid response from channels
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-
-      requestBody:
-        $ref: '#/components/requestBodies/Products'
-
-    put:
-      security:
-        - basicAuth: []
-      summary: Edit a product on all channel types
-      description: Edit a product on all channel types (online, offline)
-      operationId: editProductOnAllChannels
-      tags: [Products]
-      responses:
-        204:
-          description: Successfully edited product on all channel types
-          headers:
-            Chain-Id:
-              schema:
-                type: string
-                description: transaction chain-id
-              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
-        400:
-          description: Indicates that the Integration Server has encountered a format error on some property of the body
-          headers:
-            Chain-Id:
-              schema:
-                type: string
-                description: transaction chain-id
-              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidBodyError'
-
-        502:
-          description: The proxy server received an invalid response from channels
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
-
-      requestBody:
-        $ref: '#/components/requestBodies/Products'
-
   /products/{channelType}:
     post:
       parameters:
         - in: path
-          required: true
+          required: false
           name: channelType
           schema:
             type: string
@@ -107,7 +27,8 @@ paths:
               - offline
       security:
         - basicAuth: []
-      summary: Create a product
+      summary: Create a product on all or specified channel type.
+      description: Create a product on all or specified channel type (online, offline)
       operationId: createProduct
       tags: [Products]
       responses:
@@ -119,6 +40,7 @@ paths:
                 type: string
                 description: transaction chain-id
               example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+
         400:
           description: Indicates that the Integration Server has encountered a format error on some property of the body
           headers:
@@ -145,7 +67,7 @@ paths:
     put:
       parameters:
         - in: path
-          required: true
+          required: false
           name: channelType
           schema:
             type: string
@@ -154,7 +76,8 @@ paths:
               - offline
       security:
         - basicAuth: []
-      summary: Edit a product
+      summary: Edit a product on all or specified channel type.
+      description: Edit a product on all or specified channel type (online, offline)
       operationId: editProduct
       tags: [Products]
       responses:
@@ -178,6 +101,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidBodyError'
+
         502:
           description: The proxy server received an invalid response from channels
           content:
@@ -187,7 +111,6 @@ paths:
 
       requestBody:
         $ref: '#/components/requestBodies/Products'
-
   /products/{channelType}/{sellerName}/{storeId}/{sku}:
     delete:
       parameters:
