@@ -264,7 +264,7 @@ components:
         - sku
         - price_start
         - commercial_unit
-        - fiscal
+        - tax
       properties:
         store_id:
           type: string
