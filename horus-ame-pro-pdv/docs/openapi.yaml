@@ -338,110 +338,227 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Order'
-          example:
-            _id: b8317770-6373-4569-bfd4-bf11102442b7
-            couponNumber: 001101201906031355001
-            storeId: '001'
-            posId: '101'
-            companyId: AME
-            accountingDay: '2019-05-22'
-            endDate: '2019-05-22T15:30:23.088Z'
-            operator: '000036001357'
-            sale:
-              saleItem:
-                customer:
-                  documentType: CPF
-                  document: '12345678909'
-                invoice:
-                  createDate: '2019-05-22T15:30:23.087Z'
-                  number: 19454
-                  serie: 1
+          examples:
+            New Order:
+              value:
+                _id: b8317770-6373-4569-bfd4-bf11102442b7
+                couponNumber: 001101201906031355001
+                storeId: '001'
+                posId: '101'
+                companyId: AME
+                accountingDay: '2019-05-22'
+                endDate: '2019-05-22T15:30:23.088Z'
+                operator: '000036001357'
+                sale:
+                  saleItem:
+                    customer:
+                      documentType: CPF
+                      document: '12345678909'
+                    invoice:
+                      createDate: '2019-05-22T15:30:23.087Z'
+                      number: 19454
+                      serie: 1
+                      contingency: false
+                      sefazAuthorization:
+                        accessKey: NFe33181233014556020200654000000000271995355507
+                        authorizationDate: '2018-08-24T16:16:38-03:00'
+                        protocolNumber: '333160000150516'
+                    products:
+                    - cartRegisterDate: '2019-05-22T15:30:23.088Z'
+                      comercialUnit: '1'
+                      departmentCode: ''
+                      description: Bacon
+                      discounts:
+                      - code: PERCENTAGE_DISCOUNT
+                        value: '1.99'
+                        discountType: PERCENTAGE_DISCOUNT
+                      ean: '7896341101987'
+                      externalCode: '7896341101987'
+                      imeis: []
+                      priceType: NORMAL
+                      ncm: '49019900'
+                      cfop: '5102'
+                      taxInfo:
+                        approximateTotalValue: '2.42'
+                        icms:
+                          aliquot: '0'
+                          productOriginCode: '0'
+                          modalityBaseCalculation: '3'
+                          simplesNacionalSituation: '300'
+                        ipi:
+                          taxSituation: '99'
+                          baseCalculationValue: '10'
+                          aliquot: '0'
+                          value: '0'
+                          unitValue: '0'
+                        pis:
+                          aliquotSt: '0'
+                          baseCalculationValue: '10'
+                          baseCalculationValueSt: '0'
+                          taxSituation: '99'
+                          aliquot: '0'
+                          aliquotReais: '0'
+                          aliquotReaisSt: '0'
+                          value: '0'
+                          valueSt: '0'
+                        cofins:
+                          aliquotSt: '0'
+                          baseCalculationValue: '10'
+                          baseCalculationValueSt: '0'
+                          taxSituation: '99'
+                          aliquot: '0'
+                          aliquotReais: '0'
+                          aliquotReaisSt: '0'
+                          value: '0'
+                          valueSt: '0'
+                      quantity: 1
+                      sequenceCouponNumber: 0
+                      totalDiscountValue: '0.00'
+                      totalProductValue: '1.99'
+                      unitValue: '1.99'
+                    payments:
+                    - type: MONEY
+                      value: '0.99'
+                      change: '0'
+                      date: '2019-05-22T15:25:23.088Z'
+                    - type: AME_DIGITAL
+                      value: '0.50'
+                      ameOperationId: '654321'
+                      cashbackAmountValue: '0.05'
+                      installments: 1
+                      nsu: '123456'
+                      transactionId: '123456789'
+                      date: '2019-05-22T15:26:23.088Z'
+                    - type: DEBIT
+                      value: '0.25'
+                      installments: 1
+                      date: '2019-05-22T15:27:23.088Z'
+                    - type: CREDIT
+                      value: '0.25'
+                      installments: 1
+                      date: '2019-05-22T15:28:23.088Z'
+                    saleItemTotal:
+                      quantity: 1
+                      totalDiscountValue: '0.00'
+                      totalSale: '1.99'
+                      totalValue: '1.99'
+                sessionId: '1558539023088'
+                startDate: '2019-05-22T15:30:23.088Z'
+                zoneId: America/Fortaleza
+            Refund Order:
+              value:
+                _id: b8317770-6373-4569-bfd4-bf11102442b8
+                couponNumber: 001101201906031355002
+                storeId: '001'
+                posId: '101'
+                companyId: AME
+                accountingDay: '2019-05-22'
+                endDate: '2019-05-22T15:30:23.088Z'
+                operator: '000036001357'
+                refund:
+                  cancelReason: '1'
                   contingency: false
-                  sefazAuthorization:
-                    accessKey: NFe33181233014556020200654000000000271995355507
-                    authorizationDate: '2018-08-24T16:16:38-03:00'
-                    protocolNumber: '333160000150516'
-                products:
-                - cartRegisterDate: '2019-05-22T15:30:23.088Z'
-                  comercialUnit: '1'
-                  departmentCode: ''
-                  description: Bacon
-                  discounts:
-                  - code: PERCENTAGE_DISCOUNT
-                    value: '1.99'
-                    discountType: PERCENTAGE_DISCOUNT
-                  ean: '7896341101987'
-                  externalCode: '7896341101987'
-                  imeis: []
-                  priceType: NORMAL
-                  ncm: '49019900'
-                  cfop: '5102'
-                  taxInfo:
-                    approximateTotalValue: '2.42'
-                    icms:
-                      aliquot: '0'
-                      productOriginCode: '0'
-                      modalityBaseCalculation: '3'
-                      simplesNacionalSituation: '300'
-                    ipi:
-                      taxSituation: '99'
-                      baseCalculationValue: '10'
-                      aliquot: '0'
-                      value: '0'
-                      unitValue: '0'
-                    pis:
-                      aliquotSt: '0'
-                      baseCalculationValue: '10'
-                      baseCalculationValueSt: '0'
-                      taxSituation: '99'
-                      aliquot: '0'
-                      aliquotReais: '0'
-                      aliquotReaisSt: '0'
-                      value: '0'
-                      valueSt: '0'
-                    cofins:
-                      aliquotSt: '0'
-                      baseCalculationValue: '10'
-                      baseCalculationValueSt: '0'
-                      taxSituation: '99'
-                      aliquot: '0'
-                      aliquotReais: '0'
-                      aliquotReaisSt: '0'
-                      value: '0'
-                      valueSt: '0'
-                  quantity: 1
-                  sequenceCouponNumber: 0
-                  totalDiscountValue: '0.00'
-                  totalProductValue: '1.99'
-                  unitValue: '1.99'
-                payments:
-                - type: MONEY
-                  value: '0.99'
-                  change: '0'
-                  date: '2019-05-22T15:25:23.088Z'
-                - type: AME_DIGITAL
-                  value: '0.50'
-                  ameOperationId: '654321'
-                  cashbackAmountValue: '0.05'
-                  installments: 1
-                  nsu: '123456'
-                  transactionId: '123456789'
-                  date: '2019-05-22T15:26:23.088Z'
-                - type: DEBIT
-                  value: '0.25'
-                  installments: 1
-                  date: '2019-05-22T15:27:23.088Z'
-                - type: CREDIT
-                  value: '0.25'
-                  installments: 1
-                  date: '2019-05-22T15:28:23.088Z'
-                saleItemTotal:
-                  quantity: 1
-                  totalDiscountValue: '0.00'
-                  totalSale: '1.99'
-                  totalValue: '1.99'
-            sessionId: '1558539023088'
-            startDate: '2019-05-22T15:30:23.088Z'
-            zoneId: America/Fortaleza
+                  originalSaleId: b8317770-6373-4569-bfd4-bf11102442b7
+                  originalCouponNumber: 001101201906031355001
+                  sefazAuthorizationDate: '2019-05-23T18:36:18-03:00'
+                  sefazProtocolNumber: '333190000484874'
+                sale:
+                  saleItem:
+                    customer:
+                      documentType: CPF
+                      document: '12345678909'
+                    invoice:
+                      createDate: '2019-05-22T15:30:23.087Z'
+                      number: 19454
+                      serie: 1
+                      contingency: false
+                      sefazAuthorization:
+                        accessKey: NFe33181233014556020200654000000000271995355507
+                        authorizationDate: '2018-08-24T16:16:38-03:00'
+                        protocolNumber: '333160000150516'
+                    products:
+                    - cartRegisterDate: '2019-05-22T15:30:23.088Z'
+                      commercialUnit: '1'
+                      departmentCode: ''
+                      description: Bacon
+                      discounts:
+                      - code: PERCENTAGE_DISCOUNT
+                        value: '1.99'
+                        discountType: PERCENTAGE_DISCOUNT
+                      ean: '7896341101987'
+                      externalCode: '7896341101987'
+                      imeis: []
+                      priceType: NORMAL
+                      ncm: '49019900'
+                      cfop: '5102'
+                      taxInfo:
+                        approximateTotalValue: '2.42'
+                        icms:
+                          aliquot: '0'
+                          productOriginCode: '0'
+                          modalityBaseCalculation: '3'
+                          simplesNacionalSituation: '300'
+                        ipi:
+                          taxSituation: '99'
+                          baseCalculationValue: '10'
+                          aliquot: '0'
+                          value: '0'
+                          unitValue: '0'
+                        pis:
+                          aliquotSt: '0'
+                          baseCalculationValue: '10'
+                          baseCalculationValueSt: '0'
+                          taxSituation: '99'
+                          aliquot: '0'
+                          aliquotReais: '0'
+                          aliquotReaisSt: '0'
+                          value: '0'
+                          valueSt: '0'
+                        cofins:
+                          aliquotSt: '0'
+                          baseCalculationValue: '10'
+                          baseCalculationValueSt: '0'
+                          taxSituation: '99'
+                          aliquot: '0'
+                          aliquotReais: '0'
+                          aliquotReaisSt: '0'
+                          value: '0'
+                          valueSt: '0'
+                      quantity: 1
+                      sequenceCouponNumber: 0
+                      totalDiscountValue: '0.00'
+                      totalProductValue: '1.99'
+                      unitValue: '1.99'
+                    payments:
+                    - type: MONEY
+                      value: '0.99'
+                      change: '0'
+                      date: '2019-05-22T15:25:23.088Z'
+                    - type: AME_DIGITAL
+                      value: '0.50'
+                      ameOperationId: '654321'
+                      cashbackAmountValue: '0.05'
+                      installments: 1
+                      nsu: '123456'
+                      transactionId: '123456789'
+                      date: '2019-05-22T15:26:23.088Z'
+                    - type: DEBIT
+                      value: '0.25'
+                      installments: 1
+                      date: '2019-05-22T15:27:23.088Z'
+                    - type: CREDIT
+                      value: '0.25'
+                      installments: 1
+                      date: '2019-05-22T15:28:23.088Z'
+                    saleItemTotal:
+                      quantity: 1
+                      totalDiscountValue: '0.00'
+                      totalSale: '1.99'
+                      totalValue: '1.99'
+                sessionId: '1558539023088'
+                startDate: '2019-05-22T15:30:23.088Z'
+                zoneId: America/Fortaleza
+
+
       description: Order Package Collection
       required: true
