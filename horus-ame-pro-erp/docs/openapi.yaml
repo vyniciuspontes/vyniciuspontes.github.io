@@ -385,66 +385,51 @@ components:
           items:
             type: string
       example:
-        store_id: '001'
-        commercial_unit: PC
-        price_start: '2019-06-06T18:51:36Z'
-        tax:
-          cfop: string
-          icms_origin_code: '0'
-        images:
-          - 'http://example.com/aeiou'
-          - 'http://example.com/aeiou'
-        cost: 5.962133916683182
-        variation_attributes:
-          - variation_attributes
-          - variation_attributes
-        length: 9.301444243932576
-        description: description
-        weight: 5.637376656633329
-        specifications:
+        seller_name: HYDRA_AMESTORETESTCOMPANY
+        product:
+          store_id: '123'
+          commercial_unit: UNID
+          price_start: 2018-11-12T25:30:08+0000
+          tax:
+            cfop: '5102'
+            icms_origin_code: '4'
+          sku: '789115010'
+          name: Produto incrível do Yan123
+          description: Melhor produto que pode existir
+          brand: string
+          ean: '7506339391312'
+          nbm: '49019900'
+          status: enabled
+          categories:
+          - code: code
+            name: name
+          images:
+          - string
+          specifications:
           - value: value
             key: key
-          - value: value
-            key: key
-        ean: ean
-        price: 6.027456183070403
-        variations:
+          qty: 1
+          price: 9.99
+          promotional_price: 0
+          cost: 0
+          weight: 0
+          height: 0
+          width: 0
+          length: 0
+          variations:
           - images:
-              - 'http://example.com/aeiou'
-              - 'http://example.com/aeiou'
+            - http://example.com/aeiou
+            - http://example.com/aeiou
             ean: ean
             qty: qty
             sku: sku
             specifications:
-              - value: value
-                key: key
-              - value: value
-                key: key
-          - images:
-              - 'http://example.com/aeiou'
-              - 'http://example.com/aeiou'
-            ean: ean
-            qty: qty
-            sku: sku
-            specifications:
-              - value: value
-                key: key
-              - value: value
-                key: key
-        qty: 0
-        name: name
-        nbm: nbm
-        width: 7.061401241503109
-        promotional_price: 1.4658129805029452
-        categories:
-          - code: code
-            name: name
-          - code: code
-            name: name
-        sku: sku
-        brand: brand
-        status: enabled
-        height: 2.3021358869347655
+            - value: value
+              key: key
+            - value: value
+              key: key
+          variation_attributes:
+          - string
 
     Category:
       type: object
