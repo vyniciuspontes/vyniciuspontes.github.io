@@ -20,6 +20,7 @@ paths:
         - in: path
           required: false
           name: channelType
+          description: Channel Type where the product will be created. If empty, the product will be created on both channel types
           schema:
             type: string
             enum:
@@ -59,7 +60,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateEditProductError'
+                $ref: '#/components/schemas/ChannelsError'
 
       requestBody:
         $ref: '#/components/requestBodies/Products'
@@ -69,6 +70,7 @@ paths:
         - in: path
           required: false
           name: channelType
+          description: Channel Type where the product will be edited. If empty, the product will be edited on both channel types
           schema:
             type: string
             enum:
@@ -107,53 +109,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateEditProductError'
+                $ref: '#/components/schemas/ChannelsError'
 
       requestBody:
         $ref: '#/components/requestBodies/Products'
-  /products/{channelType}/{sellerName}/{storeId}/{sku}:
-    delete:
-      parameters:
-        - in: path
-          required: true
-          name: channelType
-          schema:
-            type: string
-            enum:
-            - online
-            - offline
-        - in: path
-          required: true
-          name: sellerName
-          schema:
-            type: string
-        - in: path
-          required: false
-          name: storeId
-          description: Identifies the store of the operation. Necessary for offline operations.
-          schema:
-            type: string
-        - in: path
-          required: true
-          name: sku
-          description: Sku of the product to be deleted.
-          schema:
-            type: string
-      security:
-        - basicAuth: []
-      summary: Delete product
-      description: Delete product from online channel type
-      operationId: deleteOnlineProduct
-      tags: [Products]
-      responses:
-        204:
-          description: Successfully deleted product from offline channel
-        502:
-          description: The proxy server received an invalid response from pdv channel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEditProductError'
+  # /products/{channelType}/{sellerName}/{storeId}/{sku}:
+  #   delete:
+  #     parameters:
+  #       - in: path
+  #         required: true
+  #         name: channelType
+  #         schema:
+  #           type: string
+  #           enum:
+  #           - online
+  #           - offline
+  #       - in: path
+  #         required: true
+  #         name: sellerName
+  #         schema:
+  #           type: string
+  #       - in: path
+  #         required: false
+  #         name: storeId
+  #         description: Identifies the store of the operation. Necessary for offline operations.
+  #         schema:
+  #           type: string
+  #       - in: path
+  #         required: true
+  #         name: sku
+  #         description: Sku of the product to be deleted.
+  #         schema:
+  #           type: string
+  #     security:
+  #       - basicAuth: []
+  #     summary: Delete product
+  #     description: Delete product from online channel type
+  #     operationId: deleteOnlineProduct
+  #     tags: [Products]
+  #     responses:
+  #       204:
+  #         description: Successfully deleted product from offline channel
+  #       502:
+  #         description: The proxy server received an invalid response from pdv channel
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/ChannelsError'
 
 components:
   securitySchemes:
@@ -217,7 +219,7 @@ components:
         message:
           type: string
 
-    CreateEditProductError:
+    ChannelsError:
       type: object
       properties:
         timestamp:
@@ -242,9 +244,13 @@ components:
                 enum:
                   - online
                   - offline
-              error:
+              status:
                 type: string
-                description: message from the error channel
+                description: channel response status
+                example: "400"
+              error:
+                type: object
+                description: error object returned from channel
 
     ResponseProducts:
       type: object
@@ -265,6 +271,7 @@ components:
         - price_start
         - commercial_unit
         - tax
+        - store_id
       properties:
         store_id:
           type: string
@@ -377,6 +384,68 @@ components:
           description: List of attribute codes used to specify the product variations
           items:
             type: string
+      example:
+        store_id: '001'
+        commercial_unit: PC
+        price_start: '2019-06-06T18:51:36Z'
+        tax:
+          cfop: string
+          icms_origin_code: '0'
+        images:
+          - 'http://example.com/aeiou'
+          - 'http://example.com/aeiou'
+        cost: 5.962133916683182
+        variation_attributes:
+          - variation_attributes
+          - variation_attributes
+        length: 9.301444243932576
+        description: description
+        weight: 5.637376656633329
+        specifications:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        ean: ean
+        price: 6.027456183070403
+        variations:
+          - images:
+              - 'http://example.com/aeiou'
+              - 'http://example.com/aeiou'
+            ean: ean
+            qty: qty
+            sku: sku
+            specifications:
+              - value: value
+                key: key
+              - value: value
+                key: key
+          - images:
+              - 'http://example.com/aeiou'
+              - 'http://example.com/aeiou'
+            ean: ean
+            qty: qty
+            sku: sku
+            specifications:
+              - value: value
+                key: key
+              - value: value
+                key: key
+        qty: 0
+        name: name
+        nbm: nbm
+        width: 7.061401241503109
+        promotional_price: 1.4658129805029452
+        categories:
+          - code: code
+            name: name
+          - code: code
+            name: name
+        sku: sku
+        brand: brand
+        status: enabled
+        height: 2.3021358869347655
+
     Category:
       type: object
       required:
@@ -627,6 +696,7 @@ components:
         secondary_phone:
           type: string
           description: Address secondary phone number
+
     Customer:
       type: object
       properties:
@@ -653,6 +723,7 @@ components:
         state_registration:
           type: string
           description: Customer state registration (in case of a company customer)
+
     Item:
       type: object
       properties:
@@ -728,6 +799,7 @@ components:
         qty:
           type: integer
           description: Shipment item quantity
+
     ShipmentTrack:
       type: object
       required:
@@ -747,6 +819,7 @@ components:
         url:
           type: string
           description: Tracking URL
+
     Payment:
       type: object
       properties:
@@ -832,7 +905,15 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Product'
+            type: object
+            required:
+              - seller_name
+              - product
+            properties:
+              seller_name:
+                type: string
+              product:
+                $ref: '#/components/schemas/Product'
       description: Product
       required: true
 
