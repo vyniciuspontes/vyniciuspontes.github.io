@@ -298,17 +298,27 @@ components:
               required: true
             icms_origin_code:
               type: string
-              description: ICMS production origin code
+              description:
+                NATIONAL_1 (0),
+                NATIONAL_2 (3),
+                NATIONAL_3 (4),
+                NATIONAL_4 (5),
+                NATIONAL_5 (8),
+                FOREIGN_1 (1),
+                FOREIGN_2 (2),
+                FOREIGN_3 (6),
+                FOREIGN_4 (7)
               enum:
-                - "0"
-                - "3"
-                - "4"
-                - "5"
-                - "8"
-                - "1"
-                - "2"
-                - "3"
-                - "7"
+                - NATIONAL_1
+                - NATIONAL_2
+                - NATIONAL_3
+                - NATIONAL_4
+                - NATIONAL_5
+                - FOREIGN_1
+                - FOREIGN_2
+                - FOREIGN_3
+                - FOREIGN_4
+
           required:
             - cfop
             - icms_origin_code
@@ -392,7 +402,7 @@ components:
         price_start: 2018-11-12T25:30:08+0000
         tax:
           cfop: '5102'
-          icms_origin_code: '4'
+          icms_origin_code: 'NATIONAL_1'
         sku: '789115010'
         name: Produto incrível do Yan123
         description: Melhor produto que pode existir
