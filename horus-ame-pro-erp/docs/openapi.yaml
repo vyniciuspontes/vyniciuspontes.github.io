@@ -275,9 +275,10 @@ components:
       properties:
         store_id:
           type: string
-          description: Product Store Id
+          description: Product Store Id. (Required Only On Offline Channel).
         commercial_unit:
           type: string
+          description: Commercial Unit of the product. (Required Only On Offline Channel).
           enum:
             - PC
             - KG
@@ -285,10 +286,11 @@ components:
             - M
         price_start:
           type: string
-          description: date-time of price vigency
+          description: date-time of price vigency. (Required Only On Offline Channel).
           format: date-time
         tax:
           type: object
+          description: (Required Only On Offline Channel).
           properties:
             cfop:
               type: string
