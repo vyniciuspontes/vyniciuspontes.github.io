@@ -11,10 +11,10 @@ servers:
 
 
 tags:
-  - name: CreateProduct
+  - name: Product
 
 paths:
-  /CreateProduct/{channelType}:
+  /Product/{channelType}:
     post:
       parameters:
         - in: path
@@ -31,7 +31,7 @@ paths:
       summary: Create a product
       description: Create a product on all or specified channel type (online, offline)
       operationId: createProduct
-      tags: [CreateProduct]
+      tags: [Product]
       responses:
         201:
           description: Successfully created product
@@ -81,7 +81,7 @@ paths:
       summary: Edit a product
       description: Edit a product on all or specified channel type (online, offline)
       operationId: editProduct
-      tags: [CreateProduct]
+      tags: [Product]
       responses:
         204:
           description: Successfully edited product on all channel types
