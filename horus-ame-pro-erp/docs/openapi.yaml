@@ -385,51 +385,49 @@ components:
           items:
             type: string
       example:
-        seller_name: HYDRA_AMESTORETESTCOMPANY
-        product:
-          store_id: '123'
-          commercial_unit: UNID
-          price_start: 2018-11-12T25:30:08+0000
-          tax:
-            cfop: '5102'
-            icms_origin_code: '4'
-          sku: '789115010'
-          name: Produto incrível do Yan123
-          description: Melhor produto que pode existir
-          brand: string
-          ean: '7506339391312'
-          nbm: '49019900'
-          status: enabled
-          categories:
-          - code: code
-            name: name
-          images:
-          - string
+        store_id: '123'
+        commercial_unit: UNID
+        price_start: 2018-11-12T25:30:08+0000
+        tax:
+          cfop: '5102'
+          icms_origin_code: '4'
+        sku: '789115010'
+        name: Produto incrível do Yan123
+        description: Melhor produto que pode existir
+        brand: string
+        ean: '7506339391312'
+        nbm: '49019900'
+        status: enabled
+        categories:
+        - code: code
+          name: name
+        images:
+        - string
+        specifications:
+        - value: value
+          key: key
+        qty: 1
+        price: 9.99
+        promotional_price: 0
+        cost: 0
+        weight: 0
+        height: 0
+        width: 0
+        length: 0
+        variations:
+        - images:
+          - http://example.com/aeiou
+          - http://example.com/aeiou
+          ean: ean
+          qty: qty
+          sku: sku
           specifications:
           - value: value
             key: key
-          qty: 1
-          price: 9.99
-          promotional_price: 0
-          cost: 0
-          weight: 0
-          height: 0
-          width: 0
-          length: 0
-          variations:
-          - images:
-            - http://example.com/aeiou
-            - http://example.com/aeiou
-            ean: ean
-            qty: qty
-            sku: sku
-            specifications:
-            - value: value
-              key: key
-            - value: value
-              key: key
-          variation_attributes:
-          - string
+          - value: value
+            key: key
+        variation_attributes:
+        - string
 
     Category:
       type: object
@@ -897,6 +895,7 @@ components:
             properties:
               seller_name:
                 type: string
+                example: HYDRA_AMESTORETESTCOMPANY
               product:
                 $ref: '#/components/schemas/Product'
       description: Product
