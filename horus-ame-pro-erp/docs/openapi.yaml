@@ -6,8 +6,8 @@ info:
   title: Horus Ame Pro ERP
 
 servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/vyniciuspontes/horus-ame-pro-erp/1.0.0
+  - description: Homolog Server
+    url: https://horus-ame-pro-erp-v1-homolog.b2w.io
 
 
 tags:
