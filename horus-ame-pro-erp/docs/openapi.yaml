@@ -271,6 +271,7 @@ components:
         - commercial_unit
         - tax
         - store_id
+        - market_structure
       properties:
         store_id:
           type: string
@@ -395,12 +396,28 @@ components:
           description: List of attribute codes used to specify the product variations
           items:
             type: string
+        market_structure:
+          type: object
+          description: Market structure of the product. (Required only on Online channel)
+          required:
+            - family_code
+            - sector_code
+          properties:
+            family_code:
+              type: string
+            sector_code:
+              type: string
+            department_code:
+              type: string
+            sub_family_code:
+              type: string
 
     EditableProduct:
       type: object
       required:
         - sku
         - store_id
+        - market_structure
       properties:
         store_id:
           type: string
@@ -524,6 +541,21 @@ components:
           description: List of attribute codes used to specify the product variations
           items:
             type: string
+        market_structure:
+          type: object
+          description: Market structure of the product. (Required only on Online channel)
+          required:
+            - family_code
+            - sector_code
+          properties:
+            family_code:
+              type: string
+            sector_code:
+              type: string
+            department_code:
+              type: string
+            sub_family_code:
+              type: string
 
     Category:
       type: object
