@@ -568,6 +568,16 @@ components:
             type: integer
           sub_family_name:
             type: string
+        example:
+          family_name: MATINAIS
+          family_code: 4
+          sector_name: MERCEARIA DOCE
+          sector_code: 4227
+          department_name: ALIMENTOS
+          department_code: 9095
+          sub_family_code: 2
+          sub_family_name: BARRA DE CEREAIS
+
 
     MarketStructureEdit:
         type: object
