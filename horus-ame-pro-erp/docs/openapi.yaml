@@ -406,14 +406,13 @@ components:
           items:
             type: string
         market_structure:
-          $ref: '#/components/schemas/MarketStructure'
+          $ref: '#/components/schemas/MarketStructureCreate'
 
     EditableProduct:
       type: object
       required:
         - sku
         - store_id
-        - market_structure
       properties:
         store_id:
           type: string
@@ -538,9 +537,9 @@ components:
           items:
             type: string
         market_structure:
-          $ref: '#/components/schemas/MarketStructure'
+          $ref: '#/components/schemas/MarketStructureEdit'
 
-    MarketStructure:
+    MarketStructureCreate:
         type: object
         description: Market structure of the product. (Required only on Online channel)
         required:
@@ -548,6 +547,10 @@ components:
           - sector_code
           - family_name
           - sector_name
+          - department_code
+          - sub_family_code
+          - department_name
+          - sub_family_name
         properties:
           family_name:
             type: string
@@ -566,7 +569,26 @@ components:
           sub_family_name:
             type: string
 
-
+    MarketStructureEdit:
+        type: object
+        description: Market structure of the product. (Required only on Online channel)
+        properties:
+          family_name:
+            type: string
+          family_code:
+            type: integer
+          sector_name:
+            type: string
+          sector_code:
+            type: integer
+          department_name:
+            type: string
+          department_code:
+            type: integer
+          sub_family_code:
+            type: integer
+          sub_family_name:
+            type: string
 
     Category:
       type: object
