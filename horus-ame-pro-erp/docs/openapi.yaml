@@ -7,7 +7,7 @@ info:
 
 servers:
   - description: Homolog Server
-    url: https://horus-ame-pro-erp-v1-homolog.b2w.io
+    url: https://horus-ame-pro-erp-v1-homolog.b2w.io/v2
 
 
 tags:
