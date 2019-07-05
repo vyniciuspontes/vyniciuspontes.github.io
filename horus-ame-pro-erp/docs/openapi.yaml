@@ -12,9 +12,10 @@ servers:
 
 tags:
   - name: Product
+  - name: POS
 
 paths:
-  products/{channelType}:
+  /products/{channelType}:
     post:
       parameters:
         - in: path
@@ -55,7 +56,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidBodyError'
 
-        502:
+        500:
           description: The proxy server received an invalid response from channels
           content:
             application/json:
@@ -104,7 +105,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidBodyError'
 
-        502:
+        500:
           description: The proxy server received an invalid response from channels
           content:
             application/json:
@@ -156,6 +157,292 @@ paths:
   #           application/json:
   #             schema:
   #               $ref: '#/components/schemas/ChannelsError'
+
+  /sellers/{sellerName}/stores/{storeId}/pos:
+    post:
+      parameters:
+        - in: path
+          required: false
+          name: sellerName
+          description: Seller name
+          example: "HYDRA_AMESTORETESTCOMPANY"
+          schema:
+            type: string
+        - in: path
+          required: false
+          name: storeId
+          description: Store Id
+          example: "1"
+          schema:
+            type: string
+      security:
+        - basicAuth: []
+      summary: Create a POS
+      description: Create a POS
+      operationId: createPOS
+      tags:
+        - POS
+      responses:
+        201:
+          description: Successfully created POS
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+        400:
+          description: Indicates that the Integration Server has encountered a format error on some property of the body
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBodyError'
+        500:
+          description: The proxy server received an invalid response from channels
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelsError'
+
+      requestBody:
+        $ref: '#/components/requestBodies/CreatePOS'
+    get:
+      parameters:
+        - in: path
+          required: false
+          name: sellerName
+          description: Seller name
+          example: "HYDRA_AMESTORETESTCOMPANY"
+          schema:
+            type: string
+        - in: path
+          required: false
+          name: storeId
+          description: Store Id
+          example: "1"
+          schema:
+            type: string
+      security:
+        - basicAuth: []
+      summary: List POS
+      description: List POS
+      operationId: listPOS
+      tags:
+        - POS
+      responses:
+        200:
+          description: List of POS
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/POSBasicInfo'
+
+        400:
+          description: Indicates that the Integration Server has encountered a format error on some property of the body
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBodyError'
+
+        500:
+          description: The proxy server received an invalid response from channels
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelsError'
+
+  /sellers/{sellerName}/stores/{storeId}/pos/{posId}:
+    get:
+      parameters:
+        - in: path
+          required: false
+          name: sellerName
+          description: Seller name
+          example: "HYDRA_AMESTORETESTCOMPANY"
+          schema:
+            type: string
+        - in: path
+          required: false
+          name: storeId
+          description: Store Id
+          example: "1"
+          schema:
+            type: integer
+        - in: path
+          required: false
+          name: posId
+          description: POS Id
+          example: "1"
+          schema:
+            type: integer
+      security:
+        - basicAuth: []
+      summary: Get POS
+      description: Get POS
+      operationId: getPOS
+      tags:
+        - POS
+      responses:
+        200:
+          description: POS details
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/POSDetailed'
+        400:
+         description: Indicates that the Integration Server has encountered a format error on some property of the body
+         headers:
+           Chain-Id:
+             schema:
+               type: string
+               description: transaction chain-id
+             example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/InvalidBodyError'
+        500:
+         description: The proxy server received an invalid response from channels
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/ChannelsError'
+
+    delete:
+      parameters:
+        - in: path
+          required: false
+          name: sellerName
+          description: Seller name
+          example: "HYDRA_AMESTORETESTCOMPANY"
+          schema:
+            type: string
+        - in: path
+          required: false
+          name: storeId
+          description: Store Id
+          example: "1"
+          schema:
+            type: integer
+        - in: path
+          required: false
+          name: posId
+          description: POS Id
+          example: "1"
+          schema:
+            type: integer
+      security:
+        - basicAuth: []
+      summary: Delete POS
+      description: Delete POS
+      operationId: deletePOS
+      tags:
+        - POS
+      responses:
+        204:
+          description: Successfully deleted
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+
+  /sellers/{sellerName}/stores/{storeId}/pos/{posId}/qrCode:
+    get:
+      parameters:
+        - in: path
+          required: false
+          name: sellerName
+          description: Seller name
+          example: "HYDRA_AMESTORETESTCOMPANY"
+          schema:
+            type: string
+        - in: path
+          required: false
+          name: storeId
+          description: Store Id
+          example: "1"
+          schema:
+            type: string
+        - in: path
+          required: false
+          name: posId
+          description: POS Id
+          example: "1"
+          schema:
+            type: string
+      security:
+        - basicAuth: []
+      summary: Regenerate POS QRCode
+      description: Regenerate POS QRCode
+      operationId: regeneratePOS
+      tags:
+        - POS
+      responses:
+        200:
+          description: QR Code
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  qrCode:
+                    type: string
+
+        400:
+          description: Indicates that the Integration Server has encountered a format error on some property of the body
+          headers:
+            Chain-Id:
+              schema:
+                type: string
+                description: transaction chain-id
+              example: '5cf57a39e8288600070ef0b6-16-51-MONDAY-3-2019'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBodyError'
+
+        500:
+          description: The proxy server received an invalid response from channels
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelsError'
 
 components:
   securitySchemes:
@@ -217,6 +504,78 @@ components:
           type: string
         message:
           type: string
+
+    POS:
+      type: object
+      properties:
+        emites:
+          type: object
+          properties:
+            organization_id:
+              type: integer
+            serie:
+              type: integer
+            last_number:
+              type: string
+        id:
+            type: string
+            example: "122"
+        name:
+            type: string
+            example: "Meu Device"
+
+    POSDetailed:
+      type: object
+      properties:
+        emites:
+          type: object
+          properties:
+            serie:
+              type: integer
+            last_number:
+              type: string
+        id:
+            type: string
+            example: "122"
+        name:
+            type: string
+            example: "Meu Device"
+        paired:
+          type: boolean
+          example: true
+        device_model:
+          type: string
+          example: Samsung Galaxy
+        last_access:
+          type: string
+          format: date-time
+        last_update:
+          type: string
+          format: date-time
+        app_version:
+          type: string
+          example: 1.0.0
+        qrCode:
+          type: string
+          example: V09RUERQT1FXUE9LRFdRUE9LZG9rd2tkcXc=
+
+    POSBasicInfo:
+      type: object
+      properties:
+        emites:
+          type: object
+          properties:
+            serie:
+              type: integer
+        id:
+            type: string
+            example: "122"
+        name:
+            type: string
+            example: "Meu Device"
+        paired:
+          type: boolean
+          example: true
 
     ChannelsError:
       type: object
@@ -710,4 +1069,13 @@ components:
                 price: 9.99
 
       description: Product
+      required: true
+
+    CreatePOS:
+      content:
+        application/json:
+          schema:
+              $ref: '#/components/schemas/POS'
+
+      description: POS
       required: true
