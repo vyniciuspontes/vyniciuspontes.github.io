@@ -62,7 +62,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChannelsError'
-
       requestBody:
         $ref: '#/components/requestBodies/CreateProduct'
 
@@ -540,21 +539,27 @@ components:
         name:
             type: string
             example: "Meu Device"
+            description: Not implemented
         paired:
           type: boolean
           example: true
+          description: Not implemented
         device_model:
           type: string
           example: Samsung Galaxy
+          description: Not implemented
         last_access:
           type: string
           format: date-time
+          description: Not implemented
         last_update:
           type: string
           format: date-time
+          description: Not implemented
         app_version:
           type: string
           example: 1.0.0
+          description: Not implemented
         qrCode:
           type: string
           example: V09RUERQT1FXUE9LRFdRUE9LZG9rd2tkcXc=
@@ -568,14 +573,16 @@ components:
             serie:
               type: integer
         id:
-            type: string
-            example: "122"
+          type: string
+          example: "122"
         name:
-            type: string
-            example: "Meu Device"
+          type: string
+          example: "Meu Device"
+          description: Not implemented
         paired:
           type: boolean
           example: true
+          description: Not implemented
 
     ChannelsError:
       type: object
