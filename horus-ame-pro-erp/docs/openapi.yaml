@@ -7,7 +7,7 @@ info:
 
 servers:
   - description: Homolog Server
-    url: https://horus-ame-pro-erp-v1-homolog.b2w.io/v2
+    url: https://horus-ame-pro-erp-v1-homolog.b2w.io
 
 
 tags:
@@ -62,6 +62,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChannelsError'
+
       requestBody:
         $ref: '#/components/requestBodies/CreateProduct'
 
@@ -392,13 +393,6 @@ paths:
           example: "1"
           schema:
             type: string
-        - in: path
-          required: false
-          name: posId
-          description: POS Id
-          example: "1"
-          schema:
-            type: string
       security:
         - basicAuth: []
       summary: Regenerate POS QRCode
@@ -408,7 +402,7 @@ paths:
         - POS
       responses:
         200:
-          description: QR Code
+          description: List of POS
           headers:
             Chain-Id:
               schema:
@@ -421,7 +415,10 @@ paths:
                 type: object
                 properties:
                   qrCode:
-                    type: string
+                    type:
+
+
+                  $ref: '#/components/schemas/POSBasicInfo'
 
         400:
           description: Indicates that the Integration Server has encountered a format error on some property of the body
@@ -507,13 +504,13 @@ components:
     POS:
       type: object
       properties:
-        emites:
+        fiscal:
           type: object
           properties:
-            organization_id:
-              type: integer
+            id:
+              type: string
             serie:
-              type: integer
+              type: string
             last_number:
               type: string
         id:
@@ -526,11 +523,11 @@ components:
     POSDetailed:
       type: object
       properties:
-        emites:
+        fiscal:
           type: object
           properties:
             serie:
-              type: integer
+              type: string
             last_number:
               type: string
         id:
@@ -539,27 +536,21 @@ components:
         name:
             type: string
             example: "Meu Device"
-            description: Not implemented
         paired:
           type: boolean
           example: true
-          description: Not implemented
         device_model:
           type: string
           example: Samsung Galaxy
-          description: Not implemented
         last_access:
           type: string
           format: date-time
-          description: Not implemented
         last_update:
           type: string
           format: date-time
-          description: Not implemented
         app_version:
           type: string
           example: 1.0.0
-          description: Not implemented
         qrCode:
           type: string
           example: V09RUERQT1FXUE9LRFdRUE9LZG9rd2tkcXc=
@@ -567,22 +558,20 @@ components:
     POSBasicInfo:
       type: object
       properties:
-        emites:
+        fiscal:
           type: object
           properties:
             serie:
-              type: integer
+              type: string
         id:
-          type: string
-          example: "122"
+            type: string
+            example: "122"
         name:
-          type: string
-          example: "Meu Device"
-          description: Not implemented
+            type: string
+            example: "Meu Device"
         paired:
           type: boolean
           example: true
-          description: Not implemented
 
     ChannelsError:
       type: object
