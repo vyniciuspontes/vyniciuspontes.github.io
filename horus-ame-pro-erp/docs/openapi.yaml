@@ -509,13 +509,11 @@ components:
           properties:
             id:
               type: string
+              description: Fiscal organization id
             serie:
               type: string
             last_number:
               type: string
-        id:
-            type: string
-            example: "122"
         name:
             type: string
             example: "Meu Device"
