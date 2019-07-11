@@ -56,8 +56,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidBodyError'
 
-        500:
-          description: The proxy server received an invalid response from channels
+        422:
+          description: Invalid response from channels
           content:
             application/json:
               schema:
@@ -105,8 +105,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidBodyError'
 
-        500:
-          description: The proxy server received an invalid response from channels
+        422:
+          description: Invalid response from channels
           content:
             application/json:
               schema:
@@ -203,8 +203,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidBodyError'
-        500:
-          description: The proxy server received an invalid response from channels
+        422:
+          description: Invalid response from channels
           content:
             application/json:
               schema:
@@ -264,8 +264,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidBodyError'
 
-        500:
-          description: The proxy server received an invalid response from channels
+        422:
+          description: Invalid response from channels
           content:
             application/json:
               schema:
@@ -329,8 +329,8 @@ paths:
            application/json:
              schema:
                $ref: '#/components/schemas/InvalidBodyError'
-        500:
-         description: The proxy server received an invalid response from channels
+        422:
+         description: Invalid response from channels
          content:
            application/json:
              schema:
@@ -415,10 +415,8 @@ paths:
                 type: object
                 properties:
                   qrCode:
-                    type:
-
-
-                  $ref: '#/components/schemas/POSBasicInfo'
+                    type: string
+                    example: V09RUERQT1FXUE9LRFdRUE9LZG9rd2tkcXc
 
         400:
           description: Indicates that the Integration Server has encountered a format error on some property of the body
@@ -433,8 +431,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidBodyError'
 
-        500:
-          description: The proxy server received an invalid response from channels
+        422:
+          description: Invalid response from channels
           content:
             application/json:
               schema:
